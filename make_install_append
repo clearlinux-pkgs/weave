@@ -1,0 +1,4 @@
+install -d -m 755 %{buildroot}/usr/libexec/cni
+install -p -m 755 prog/weaveutil/weaveutil %{buildroot}/usr/libexec/cni/weave-plugin-%{version}
+ln -sf ./weave-plugin-%{version} %{buildroot}/usr/libexec/cni/weave-ipam
+ln -sf ./weave-plugin-%{version} %{buildroot}/usr/libexec/cni/weave-net

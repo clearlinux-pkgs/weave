@@ -1,0 +1,26 @@
+diff --git a/Makefile b/Makefile
+index 65fde9f..ff9527d 100644
+--- a/Makefile
++++ b/Makefile
+@@ -198,9 +198,18 @@ else
+ endif
+ 	$(NETGO_CHECK)
+ 
+-$(WEAVEUTIL_EXE) $(KUBEPEERS_EXE) $(WEAVENPC_EXE):
+-	go build $(BUILD_FLAGS) -o $@ ./$(@D)
+-	$(NETGO_CHECK)
++$(WEAVEUTIL_EXE) $(KUBEPEERS_EXE) $(WEAVENPC_EXE): src
++	GOPATH=$(shell pwd) go build -o $@ ./$(@D)
++
++.PHONY: src
++src:
++	@mkdir -p src/github.com/weaveworks/
++	@ln -s ../../../ src/github.com/weaveworks/weave
++	# remove duplicated dep from vendor directory
++	@rm -rf src/github.com/containernetworking/cni/vendor/github.com/vishvananda/netlink ||:
++
++install:
++	@echo "Nothing to install"
+ 
+ $(WEAVEWAIT_EXE):
+ 	go build $(BUILD_FLAGS) -tags "netgo iface mcast" -o $@ ./$(@D)

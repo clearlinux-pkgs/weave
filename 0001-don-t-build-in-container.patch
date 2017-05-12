@@ -1,0 +1,25 @@
+From 7fbdce0be9523bc6755c07283dfe17a3152ac5da Mon Sep 17 00:00:00 2001
+From: "Simental Magana, Marcos" <marcos.simental.magana@intel.com>
+Date: Mon, 8 May 2017 13:23:22 -0500
+Subject: [PATCH] don't build in container
+
+---
+ Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Makefile b/Makefile
+index 63506a8..fd5639e 100644
+--- a/Makefile
++++ b/Makefile
+@@ -3,7 +3,7 @@
+ 
+ # If you can use docker without being root, you can do "make SUDO="
+ SUDO=$(shell docker info >/dev/null 2>&1 || echo "sudo -E")
+-BUILD_IN_CONTAINER=true
++BUILD_IN_CONTAINER=false
+ RM=--rm
+ RUN_FLAGS=-ti
+ COVERAGE=
+-- 
+2.7.4
+
